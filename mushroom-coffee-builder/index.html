@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr" class="lang-fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Créateur de café aux champignons – recettes gratuites | Pure Croft</title>
+<meta name="description" content="Créez votre recette de café aux champignons : espresso, latte, cold brew, matcha, chocolat chaud ou chai, lait, sucrant et température. Fiche imprimable, lien partageable et code d&#x27;intégration.">
+<meta name="pc-title-fr" content="Créateur de café aux champignons – recettes gratuites | Pure Croft">
+<meta name="pc-title-en" content="Mushroom Coffee Builder – free recipe cards | Pure Croft">
+<link rel="canonical" href="https://purecroft.github.io/tools/mushroom-coffee-builder/">
+<link rel="alternate" hreflang="fr" href="https://purecroft.github.io/tools/mushroom-coffee-builder/">
+<link rel="alternate" hreflang="en" href="https://purecroft.github.io/tools/mushroom-coffee-builder/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://purecroft.github.io/tools/mushroom-coffee-builder/">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Pure Croft">
+<meta name="theme-color" content="#7a4b2a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pure Croft Tools">
+<meta property="og:title" content="Créateur de café aux champignons – recettes gratuites | Pure Croft">
+<meta property="og:description" content="Créez votre recette de café aux champignons : espresso, latte, cold brew, matcha, chocolat chaud ou chai, lait, sucrant et température. Fiche imprimable, lien partageable et code d&#x27;intégration.">
+<meta property="og:url" content="https://purecroft.github.io/tools/mushroom-coffee-builder/">
+<meta property="og:image" content="https://purecroft.github.io/tools/assets/og-mushroom-coffee-builder.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mushroom Coffee Builder – free recipe cards | Pure Croft">
+<meta name="twitter:description" content="Create your mushroom coffee recipe: espresso, latte, cold brew, matcha, hot chocolate or chai, milk, sweetener and temperature. Printable card, shareable link and embed code.">
+<meta name="twitter:image" content="https://purecroft.github.io/tools/assets/og-mushroom-coffee-builder.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.builder-grid{display:grid;gap:18px}
+@media(min-width:900px){.builder-grid{grid-template-columns:1fr 1.05fr;align-items:start}#recipe-col{position:sticky;top:12px}}
+.recipe-card{border-top:6px solid var(--brand-2)}
+.rc-head{display:flex;gap:14px;align-items:center}
+.rc-icon{font-size:2.6rem}
+.rc-kicker{margin:0;text-transform:uppercase;font-size:.75rem;letter-spacing:.08em;color:var(--brand-2);font-weight:700}
+.rc-title{margin:.1em 0}
+.rc-sub{margin:0;color:var(--muted);font-size:.92rem}
+.recipe-card h3{margin:1.1em 0 .4em;font-size:1.05rem}
+.rc-steps li,.rc-ingr li{margin:.35em 0}
+.rc-foot{margin-top:16px;font-size:.8rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.embed-box textarea{min-height:110px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem}
+.embed-credit{display:none;text-align:center;font-size:.8rem;margin:10px 0 0}
+html.embed header.site,html.embed footer.site,html.embed .hide-embed{display:none !important}
+html.embed main{padding:10px 0}
+html.embed .embed-credit{display:block}
+@media print{#builder,.embed-box,.lede,h1,.intro-note{display:none !important}.builder-grid{display:block}.recipe-card{border:1px solid #999}}
+</style>
+<script src="../assets/common.js"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Créateur de café aux champignons / Mushroom Coffee Builder",
+ "description": "Outil gratuit pour créer des recettes de café aux champignons. Free tool to create mushroom coffee recipes.",
+ "url": "https://purecroft.github.io/tools/mushroom-coffee-builder/",
+ "applicationCategory": "LifestyleApplication",
+ "operatingSystem": "Any",
+ "browserRequirements": "Requires JavaScript",
+ "inLanguage": [
+  "fr",
+  "en"
+ ],
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "EUR"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Pure Croft",
+  "url": "https://purecroft.fr/",
+  "email": "inquiries@purecroft.fr"
+ },
+ "creator": {
+  "@type": "Organization",
+  "name": "Pure Croft",
+  "url": "https://purecroft.fr/",
+  "email": "inquiries@purecroft.fr"
+ },
+ "license": "https://opensource.org/licenses/MIT"
+}
+</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main"><span class="l-fr">Aller au contenu</span><span class="l-en" lang="en">Skip to content</span></a>
+<header class="site"><div class="wrap">
+<a class="logo" href="../">Pure <span>Croft</span> · <span class="l-fr">Outils</span><span class="l-en" lang="en">Tools</span></a>
+<nav class="tools" aria-label="Outils / Tools"><a href="../"><span class="l-fr">Outils</span><span class="l-en" lang="en">Tools</span></a><a href="../mushroom-coffee-builder/" aria-current="page"><span class="l-fr">Café aux champignons</span><span class="l-en" lang="en">Mushroom coffee</span></a><a href="../clean-label-checker/"><span class="l-fr">Clean Label Checker</span><span class="l-en" lang="en">Clean Label Checker</span></a><a href="../glossary/"><span class="l-fr">Glossaire</span><span class="l-en" lang="en">Glossary</span></a></nav>
+<div class="langswitch" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+</div></header>
+<main id="main"><div class="wrap">
+
+<h1 class="hide-embed"><span class="l-fr">Créateur de café aux champignons</span><span class="l-en" lang="en">Mushroom Coffee Builder</span></h1>
+<p class="lede hide-embed"><span class="l-fr">Composez votre café aux champignons en quelques clics : choisissez la base, le lait, le sucrant et la température, et obtenez une fiche recette pas à pas à imprimer, partager ou intégrer sur votre blog.</span><span class="l-en" lang="en">Build your mushroom coffee in a few clicks: pick the base, milk, sweetener and temperature, and get a step-by-step recipe card to print, share or embed on your blog.</span></p>
+<div class="builder-grid">
+<form id="builder" class="card" onsubmit="return false" aria-label="Recipe options">
+<fieldset><legend><span class="l-fr">1. Base</span><span class="l-en" lang="en">1. Base</span></legend><div class="chips" id="f-base"></div></fieldset>
+<fieldset><legend><span class="l-fr">2. Lait ou boisson végétale</span><span class="l-en" lang="en">2. Milk or plant drink</span></legend><div class="chips" id="f-milk"></div></fieldset>
+<fieldset><legend><span class="l-fr">3. Sucrant</span><span class="l-en" lang="en">3. Sweetener</span></legend><div class="chips" id="f-sweet"></div></fieldset>
+<fieldset><legend><span class="l-fr">4. Température</span><span class="l-en" lang="en">4. Temperature</span></legend><div class="chips" id="f-temp"></div></fieldset>
+<fieldset><legend><span class="l-fr">5. Touche finale</span><span class="l-en" lang="en">5. Finishing touch</span></legend><div class="chips" id="f-extra"></div></fieldset>
+<div class="actions"><button type="button" class="btn ghost" id="btn-random">🎲 <span class="l-fr">Surprenez-moi</span><span class="l-en" lang="en">Surprise me</span></button></div>
+</form>
+<div id="recipe-col">
+<article class="card recipe-card" id="recipe" aria-live="polite"></article>
+<div class="actions no-print">
+<button type="button" class="btn" id="btn-print">🖨️ <span class="l-fr">Imprimer la fiche</span><span class="l-en" lang="en">Print card</span></button>
+<button type="button" class="btn ghost" id="btn-share">🔗 <span class="l-fr">Partager le lien</span><span class="l-en" lang="en">Share link</span></button>
+</div>
+<p class="embed-credit no-print"><a href="https://purecroft.github.io/tools/mushroom-coffee-builder/" target="_blank" rel="noopener"><span class="l-fr">Outil de recettes par Pure Croft</span><span class="l-en" lang="en">Recipe tool by Pure Croft</span></a></p>
+<div class="card embed-box hide-embed no-print" style="margin-top:18px">
+<h2 style="margin-top:0"><span class="l-fr">Intégrer cet outil sur votre site</span><span class="l-en" lang="en">Embed this tool on your site</span></h2>
+<p class="note"><span class="l-fr">Copiez ce code et collez-le dans votre article ou page (bloc HTML). La recette actuellement affichée sera celle proposée par défaut.</span><span class="l-en" lang="en">Copy this code and paste it into your post or page (HTML block). The recipe currently shown will be the default one.</span></p>
+<label for="embed-code" class="note"><span class="l-fr">Code d'intégration</span><span class="l-en" lang="en">Embed code</span></label>
+<textarea id="embed-code" readonly></textarea>
+<div class="actions"><button type="button" class="btn" id="btn-embed">📋 <span class="l-fr">Copier le code d'intégration</span><span class="l-en" lang="en">Copy embed code</span></button></div>
+</div>
+</div>
+</div>
+<section class="hide-embed intro-note">
+<h2><span class="l-fr">Comment ça marche ?</span><span class="l-en" lang="en">How does it work?</span></h2>
+<p><span class="l-fr">Chaque recette inclut une étape « quelques gouttes d'extrait de champignons ». Avec le <a href="https://purecroft.fr/products/5-champignons-complexe-gouttes">Complexe 5 Champignons Pure Croft en gouttes</a> (Reishi, Cordyceps, Crinière de lion, Shiitaké, Chaga), votre café habituel devient un café aux champignons, sans poudre à dissoudre. Suivez toujours la dose indiquée sur l'étiquette de votre produit.</span><span class="l-en" lang="en">Every recipe includes an 'add a few drops of mushroom extract' step. With <a href="https://purecroft.fr/products/5-champignons-complexe-gouttes">Pure Croft 5-Mushroom Complex drops</a> (Reishi, Cordyceps, Lion's Mane, Shiitake, Chaga), your everyday coffee becomes mushroom coffee, with no powder to dissolve. Always follow the dose on your product label.</span></p>
+<p><span class="l-fr">Vos choix sont enregistrés dans l'adresse de la page : copiez-la pour retrouver ou partager votre recette. Rien n'est envoyé à un serveur.</span><span class="l-en" lang="en">Your choices are saved in the page address: copy it to come back to or share your recipe. Nothing is sent to a server.</span></p>
+</section>
+
+</div></main>
+<footer class="site"><div class="wrap">
+<p><span class="l-fr">Réalisé par</span><span class="l-en" lang="en">Made by</span> Pure Croft · <a href="https://purecroft.fr/">purecroft.fr</a> · <a href="mailto:inquiries@purecroft.fr">inquiries@purecroft.fr</a></p>
+<p class="note"><span class="l-fr">Outils gratuits, sans compte, sans cookies ni suivi. Code source sous licence MIT.</span><span class="l-en" lang="en">Free tools, no account, no cookies, no tracking. Source code under the MIT licence.</span></p>
+</div></footer>
+</body>
+</html>
