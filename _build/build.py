@@ -20,6 +20,7 @@ def bi(fr, en, tag="span"):
 
 NAV = [("", "🏠", "Outils", "Tools"),
        ("mushroom-coffee-builder/", "☕", "Café aux champignons", "Mushroom coffee"),
+       ("tea-latte/", "🫖", "Thé & latte", "Tea & latte"),
        ("clean-label-checker/", "🔍", "Clean Label Checker", "Clean Label Checker"),
        ("glossary/", "📖", "Glossaire", "Glossary")]
 
@@ -111,6 +112,10 @@ index_body = f"""
 <h2>{bi("Créateur de café aux champignons", "Mushroom Coffee Builder")}</h2>
 <p>{bi("Choisissez une base (espresso, latte, cold brew, matcha, chai…), un lait, un sucrant et la température : obtenez une fiche recette imprimable, partageable et intégrable sur votre site.",
  "Pick a base (espresso, latte, cold brew, matcha, chai…), milk, sweetener and temperature: get a printable, shareable recipe card you can also embed on your site.")}</p></a>
+<a class="card tile" href="tea-latte/"><div class="emoji" aria-hidden="true">🫖</div>
+<h2>{bi("Générateur de recettes de thé et latte aux champignons", "Mushroom Tea & Latte Recipe Generator")}</h2>
+<p>{bi("Thé noir ou vert, rooibos, camomille, verveine, tilleul, café, chocolat ou chai : choisissez lait, sucrant, épices et moment de la journée pour obtenir une fiche recette à copier, imprimer, partager ou intégrer.",
+ "Black or green tea, rooibos, chamomile, verbena, linden, coffee, cocoa or chai: pick milk, sweetener, spices and time of day to get a recipe card to copy, print, share or embed.")}</p></a>
 <a class="card tile" href="clean-label-checker/"><div class="emoji" aria-hidden="true">🔍</div>
 <h2>{bi("Clean Label Checker", "Clean Label Checker")}</h2>
 <p>{bi("Collez une liste d'ingrédients : les charges, excipients, additifs, sucres, édulcorants, colorants et numéros E sont surlignés, avec une explication neutre pour chacun.",
@@ -130,11 +135,12 @@ index_ld = {"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "Pure Croft Tools", "url": SITE, "inLanguage": ["fr", "en"], "publisher": ORG},
     {"@type": "ItemList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "url": SITE + "mushroom-coffee-builder/", "name": "Créateur de café aux champignons / Mushroom Coffee Builder"},
-        {"@type": "ListItem", "position": 2, "url": SITE + "clean-label-checker/", "name": "Clean Label Checker"},
-        {"@type": "ListItem", "position": 3, "url": SITE + "glossary/", "name": "Glossaire des champignons fonctionnels / Functional mushroom glossary"}]}]}
+        {"@type": "ListItem", "position": 2, "url": SITE + "tea-latte/", "name": "Générateur de recettes de thé et latte aux champignons / Mushroom Tea & Latte Recipe Generator"},
+        {"@type": "ListItem", "position": 3, "url": SITE + "clean-label-checker/", "name": "Clean Label Checker"},
+        {"@type": "ListItem", "position": 4, "url": SITE + "glossary/", "name": "Glossaire des champignons fonctionnels / Functional mushroom glossary"}]}]}
 write("index.html", page("", "Outils gratuits autour des champignons | Pure Croft", "Free mushroom tools | Pure Croft",
-    "Outils gratuits Pure Croft : créateur de café aux champignons, vérificateur d'étiquettes clean label et glossaire des champignons fonctionnels. Sans compte ni suivi.",
-    "Free Pure Croft tools: mushroom coffee recipe builder, clean label ingredient checker and functional mushroom glossary. No account, no tracking.",
+    "Outils gratuits Pure Croft : créateur de café aux champignons, générateur de thés et lattes aux champignons, vérificateur d'étiquettes clean label et glossaire des champignons fonctionnels. Sans compte ni suivi.",
+    "Free Pure Croft tools: mushroom coffee recipe builder, mushroom tea & latte recipe generator, clean label ingredient checker and functional mushroom glossary. No account, no tracking.",
     index_body, index_ld, depth=0))
 
 # ---------------------------------------------------------------- coffee builder
@@ -204,6 +210,55 @@ write("mushroom-coffee-builder/index.html", page("mushroom-coffee-builder/",
         "Outil gratuit pour créer des recettes de café aux champignons. Free tool to create mushroom coffee recipes.",
         "mushroom-coffee-builder/", "LifestyleApplication"),
     scripts=("app.js",), extra_css=coffee_css))
+
+# ---------------------------------------------------------------- tea & latte generator
+tea_css = coffee_css.replace("</style>", ".rc-tip{background:#faf3ea;border-radius:8px;padding:10px 12px;font-size:.9rem}\n</style>")
+tea_body = f"""
+<h1 class="hide-embed">{bi("Générateur de recettes de thé et latte aux champignons", "Mushroom Tea &amp; Latte Recipe Generator")}</h1>
+<p class="lede hide-embed">{bi("Choisissez une base, un lait, un sucrant, des épices et le moment de la journée : obtenez une fiche recette avec ingrédients, étapes et temps de préparation, à copier, imprimer, partager ou intégrer sur votre blog.",
+ "Pick a base, milk, sweetener, extras and the time of day: get a recipe card with ingredients, steps and timing to copy, print, share or embed on your blog.")}</p>
+<div class="builder-grid">
+<form id="builder" class="card" onsubmit="return false" aria-label="Recipe options">
+<fieldset><legend>{bi("1. Base", "1. Base")}</legend><div class="chips" id="f-base"></div></fieldset>
+<fieldset><legend>{bi("2. Lait ou boisson végétale", "2. Milk or plant drink")}</legend><div class="chips" id="f-milk"></div></fieldset>
+<fieldset><legend>{bi("3. Sucrant", "3. Sweetener")}</legend><div class="chips" id="f-sweet"></div></fieldset>
+<fieldset><legend>{bi("4. Extras (plusieurs choix possibles)", "4. Extras (pick any)")}</legend><div class="chips" id="f-extra"></div></fieldset>
+<fieldset><legend>{bi("5. Moment de la journée", "5. Time of day")}</legend><div class="chips" id="f-mood"></div></fieldset>
+<div class="actions"><button type="button" class="btn ghost" id="btn-random">🎲 {bi("Surprenez-moi", "Surprise me")}</button></div>
+</form>
+<div id="recipe-col">
+<article class="card recipe-card" id="recipe" aria-live="polite"></article>
+<div class="actions no-print">
+<button type="button" class="btn" id="btn-copy">📋 {bi("Copier la recette", "Copy recipe")}</button>
+<button type="button" class="btn ghost" id="btn-print">🖨️ {bi("Imprimer", "Print")}</button>
+<button type="button" class="btn ghost" id="btn-share">🔗 {bi("Partager le lien", "Share link")}</button>
+</div>
+<p class="embed-credit no-print">{bi("Outil gratuit par", "Free tool by")} <a href="{BRAND}" target="_blank" rel="noopener">Pure Croft</a></p>
+<div class="card embed-box hide-embed no-print" style="margin-top:18px">
+<h2 style="margin-top:0">{bi("Intégrer cet outil sur votre site", "Embed this tool on your site")}</h2>
+<p class="note">{bi("Copiez ce code et collez-le dans un bloc HTML de votre article. La recette affichée sera celle proposée par défaut.", "Copy this code and paste it into an HTML block in your post. The recipe shown will be the default one.")}</p>
+<label for="embed-code" class="note">{bi("Code d'intégration", "Embed code")}</label>
+<textarea id="embed-code" readonly></textarea>
+<div class="actions"><button type="button" class="btn" id="btn-embed">📋 {bi("Copier le code d'intégration", "Copy embed code")}</button></div>
+</div>
+</div>
+</div>
+<section class="hide-embed intro-note">
+<h2>{bi("Comment ça marche ?", "How does it work?")}</h2>
+<p>{bi("Chaque recette se termine par 3 à 5 gouttes d'un extrait liquide de champignons : le Reishi à l'écorce d'orange pour les recettes du soir, le Complexe 5 Champignons (Reishi, Crinière de lion, Cordyceps sinensis, Chaga, Shiitaké) pour celles du matin. Les extraits Pure Croft sont sans alcool, dans de l'huile MCT, fabriqués dans l'UE (Pologne) pour une marque française.",
+ "Every recipe finishes with 3–5 drops of a liquid mushroom extract: Reishi with orange peel for evening recipes, the 5-mushroom blend (Reishi, Lion's Mane, Cordyceps sinensis, Chaga, Shiitake) for morning ones. Pure Croft extracts are alcohol-free, in MCT oil, and made in the EU (Poland) for a French brand.")} <a href="{BRAND}">purecroft.fr</a></p>
+<p>{bi("Vos choix sont enregistrés dans l'adresse de la page : copiez-la pour partager votre recette. Rien n'est envoyé à un serveur.", "Your choices are saved in the page address: copy it to share your recipe. Nothing is sent to a server.")}</p>
+</section>
+"""
+write("tea-latte/index.html", page("tea-latte/",
+    "Générateur de recettes de thé et latte aux champignons – gratuit | Pure Croft",
+    "Mushroom Tea & Latte Recipe Generator – free | Pure Croft",
+    "Créez votre recette de thé, infusion ou latte aux champignons : base, lait, sucrant, épices et moment de la journée. Fiche à copier, imprimer, partager ou intégrer.",
+    "Build a mushroom tea or latte recipe: base, milk, sweetener, spices and time of day. Recipe card to copy, print, share or embed. Free, no sign-up.",
+    tea_body, webapp("Générateur de recettes de thé et latte aux champignons / Mushroom Tea & Latte Recipe Generator",
+        "Outil gratuit pour créer des recettes de thé et latte aux champignons. Free tool to build mushroom tea and latte recipes.",
+        "tea-latte/", "LifestyleApplication"),
+    scripts=("app.js",), extra_css=tea_css))
 
 # ---------------------------------------------------------------- clean label checker
 clc_css = """<style>
@@ -316,7 +371,7 @@ write("404.html", page("404.html", "Page introuvable | Pure Croft Tools", "Page 
     "Page introuvable.", "Page not found.",
     f'<h1>{bi("Page introuvable", "Page not found")}</h1><p><a href="{SITE}">{bi("Retour aux outils", "Back to the tools")}</a></p>',
     {"@context": "https://schema.org", "@type": "WebPage", "name": "404"}, depth=0).replace('href="assets/', f'href="{SITE}assets/').replace('src="assets/', f'src="{SITE}assets/').replace('content="index,follow"', 'content="noindex"'))
-urls = ["", "mushroom-coffee-builder/", "clean-label-checker/", "glossary/"]
+urls = ["", "mushroom-coffee-builder/", "tea-latte/", "clean-label-checker/", "glossary/"]
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
 for u in urls:
     sm.append(f'<url><loc>{SITE}{u}</loc><xhtml:link rel="alternate" hreflang="fr" href="{SITE}{u}"/><xhtml:link rel="alternate" hreflang="en" href="{SITE}{u}?lang=en"/></url>')

@@ -8,6 +8,7 @@ FR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 PAGES = {
   "index": ("Outils gratuits autour des champignons", "Free mushroom tools"),
   "mushroom-coffee-builder": ("Créateur de café aux champignons", "Mushroom Coffee Builder"),
+  "tea-latte": ("Thé & latte aux champignons", "Mushroom Tea & Latte Recipe Generator"),
   "clean-label-checker": ("Clean Label Checker", "Analyse de liste d'ingrédients · Ingredient scanner"),
   "glossary": ("Glossaire des champignons fonctionnels", "Functional mushroom glossary"),
 }

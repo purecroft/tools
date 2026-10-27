@@ -8,6 +8,7 @@ Live site (once published with GitHub Pages): https://purecroft.github.io/tools/
 | Tool | Path | What it does |
 |---|---|---|
 | Créateur de café aux champignons / Mushroom Coffee Builder | `mushroom-coffee-builder/` | Pick base, milk, sweetener, temperature and a finishing touch → step-by-step recipe card. Shareable URL, print, "copy embed code" (iframe + attribution link). |
+| Générateur de recettes de thé et latte aux champignons / Mushroom Tea & Latte Recipe Generator | `tea-latte/` | Pick base (teas, herbal infusions, coffee, cocoa, chai), milk, sweetener, extras and time of day → recipe card with ingredients, steps and timing. Copy, print, shareable URL, "Surprise me", embed code. |
 | Clean Label Checker | `clean-label-checker/` | Paste an ingredient list → fillers, excipients, additives, sugars, sweeteners, colours, mycelium-on-grain and E-numbers highlighted with a neutral one-liner. |
 | Glossaire des champignons fonctionnels / Functional mushroom glossary | `glossary/` | Searchable, sourced definitions (fruiting body, mycelium, 10:1 ratio, extraction, beta-glucans, species…). |
 
@@ -18,6 +19,7 @@ index.html                  landing page
 404.html  robots.txt  sitemap.xml  .nojekyll
 assets/                     style.css, common.js (language toggle, copy, toast), favicon, OpenGraph images
 mushroom-coffee-builder/    index.html + app.js
+tea-latte/                  index.html + app.js
 clean-label-checker/        index.html + data.js (shared with the browser extension) + app.js
 glossary/                   index.html (static, SEO-friendly) + app.js (search)
 _build/                     build.py (generates the HTML pages), glossary_data.py, og.py, test_clc.js
